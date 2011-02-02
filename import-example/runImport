@@ -1,0 +1,2 @@
+#/bin/bash
+ash -input-csv-with-header=personsFile:people.csv -input-csv-with-header=pairingFile:pairing.csv -script import.script

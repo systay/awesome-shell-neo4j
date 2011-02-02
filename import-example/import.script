@@ -1,0 +1,12 @@
+for( var person in personsFile ) {
+	print("Importing " + person["Name"]);
+	var node = db.createNode( person.map() );
+	node.index("Id", "Name");
+}
+
+for( var connection in pairingFile ) {
+	var node1 = db.index('personIdIndex').getSingle('Id', connection['PersonId1']);
+	var node2 = db.index('personIdIndex').getSingle('Id', connection['PersonId2']);
+	var relationship = node.createRelationshipTo( node2 );
+	relationshop.setProperty('pairingCount', connection['numberOfPairings']);
+}

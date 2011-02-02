@@ -1,0 +1,139 @@
+DONE
+==========================
+Simple relationships
+---
+I want to be able to simply create a relationship without having to implement RelationshipType
+ - node1.createRelationshipTo( node2, "friend" )
+So that I can simply do stuff in the shell
+
+Auto-transactions
+---
+I want to have auto-commit transactions: If mutating operations are done outside a transaction, it should be auto-committed
+So that I don't have to create/success/finish for small ad-hoc updates
+
+Create nodes with properties
+---
+I want to be able to create a node with properties set straight away
+ - db.createNode( props( 'name', 'Smith', 'age', 32 ) );
+So that my life doesn't suck
+
+Simple relationships #2
+---
+I want to be able to create properties on a a relationship simply by passing in a hash map to the createRelationshipTo
+ - node1.createRelationshipTo( node2, "friend", props('added', '2010-10-10',  'sexual', 'nope'))
+So that I can simplify my shell code
+
+Delete node with relations
+---
+I want all relationships going out/in from a node should also be deleted when the node is deleted
+So that I don't have to manually delete relationships when deleting a node
+
+New relationship type secure
+---
+If I add a new relationshipType, and a relationship type just like it, but the difference is only in casing, ask me if I mean the already existing relationship type.
+ - node.createRelationshipTo( node2, "friend" );
+> A relationship type of "FRIEND" already exists. Did you mean that? (y/n/ay/an)
+So that I don't mess upp my relationship types by accident
+
+Read files
+---
+I want to be able to iterate over a text files lines, the file being created from the command shell
+ - # awesome-shell -input-csv=file1=/etc/motd
+   for( var line in file1 ) {
+	print ( line );
+   }
+So that I can script insertion to the graph simply
+
+Read files files as a hash map
+---
+I want to be able to automatically read lines from a csv file:
+- # awesome-shell -input-csv:file1=/etc/motd
+   for( var line in file1 ) {
+		 print( line['key1'] );
+      db.createNode( line.map() );
+   }
+
+Backup
+---
+I want an easy way to create backups, including the initial backup
+
+Read only
+---
+When I connect to an existing database, if it's already in use, I want the database to be started in read-only mode
+
+Show stacktrace
+---
+If an exception is thrown, I want to be able to see it by executing a command.
+
+
+
+TODO
+==========================
+Access indexes #1
+---
+I want to be able to index properties without having to enter values
+ - node.index( 'nodeIndexName', 'name', 'age' );
+ - relationShip.index( 'relIndexName', 'added' );
+So my scripts can be simplified
+
+Access indexes #2
+---
+I want to be able to find nodes with indexes
+ - node = db.nodeIndex('nodeIndexName').getSingle('name', 'smith' );
+ - relationship = db.relationshopIndex('relIndexName').getSingle('added', '2010-10-10');
+ - nodes = db.nodeIndex('nodeIndexName').getSingle('name', 'smith' )
+   for (var node in nodes) {
+	print( node['name'] );
+   }
+So that I can test stuff interactively
+
+Easy map
+---
+I want to be able to quickly create a hash map, and fill it with values,
+So that I can send in parameters as hash maps easily
+
+Connect to local server
+---
+I want to be able to connect to a local server, without having to enter any information about the server
+So that I don't have to remember server settings to enter the shell
+
+Access node properties as a hash map
+---
+I want to be able to read properties on nodes and relationships as if they where a hashmap:
+ - print( node['key1'] );
+So that my scripts are easy to read and write
+
+Graph algos as methods on node
+---
+I want to be able to access the graph algorithms as methods on a node:
+ - Path path = node.singleShortestPathTo( node2 );
+So that I can try things out in my scripts quickly.
+
+Pretty print paths
+---
+I want to quickly be able to print out paths in a easy to read format
+ - Path path = node.singleShortestPathTo( node2, 4 );
+   print( path ); 
+	(name: Smith, age: 32) == FRIEND ==> (name: Andersson, age: 28) <== FRIEND == (name: Trinity, age: 29)
+So that I can look at my data and quickly understand it
+
+Write files
+---
+I want to be able to write to a file, the file being created from the command shell
+ - # awesome-shell -output-file=file1=/etc/motd
+   file1.println( "I can haz write files?" );
+So that my scripts can output to a file in a simple mode
+
+Write files as hashmap
+---
+I want to be able to write hash maps to a file, and have them persisted like this: key1="value1", key2="value2", key3="value3"
+ - # awesome-shell -output-file=file1=/etc/motd
+   file1.println( node.map() );
+So that I can output nodes and data quickly
+
+Log stuff
+---
+I want to be able to log to the server log
+	- log.info("Running import script");
+So that my Neo4j logs are all gathered into one place
+	
