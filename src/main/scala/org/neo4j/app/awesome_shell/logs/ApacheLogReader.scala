@@ -22,15 +22,15 @@ package org.neo4j.app.awesome_shell.logs
 import java.lang.Iterable
 import java.io.{BufferedReader, Reader}
 import java.util.regex.{Matcher, Pattern}
-import java.util.{HashMap, Map, Iterator}
 import java.text.SimpleDateFormat
+import java.util.{Locale, HashMap, Map, Iterator}
 
 class ApacheLogReader(input: Reader) extends Iterable[ Map[ String, Object ] ] with Iterator[ Map[ String, Object ] ]
 {
   val reader = new BufferedReader(input)
   var nextLine: String = reader.readLine
   val pattern = Pattern.compile("^([\\d.]+) (\\S+) (\\S+) \\[([\\w:/]+\\s[+\\-]\\d{4})\\] \"GET /\\?(.+?) HTTP/([^\"]+)\" (\\d{3}) (\\d+|-) \"([^\"]+)\" \"([^\"]+)\"")
-  val dateTimeFormat = new SimpleDateFormat("dd/MMM/yyyy:kk:m:ss")
+  val dateTimeFormat = new SimpleDateFormat("dd/MMM/yyyy:kk:m:ss", Locale.ENGLISH)
 
   val ParamRE = """(.+)=(.+)""".r
 
