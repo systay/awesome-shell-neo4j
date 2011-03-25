@@ -26,7 +26,6 @@ import java.util.Map
 import java.io.File
 import org.apache.commons.io.FileUtils
 import org.neo4j.kernel.AbstractGraphDatabase
-import org.neo4j.onlinebackup.Neo4jBackup
 
 class SimpleGraphDatabase(inner: AbstractGraphDatabase)
 {
@@ -182,11 +181,11 @@ class SimpleGraphDatabase(inner: AbstractGraphDatabase)
     }
   }
 
-  def backupTo(location: String) =
-  {
-    val backup = Neo4jBackup.neo4jDataSource(getInner(), location)
-    backup.doBackup();
-  }
+//  def backupTo(location: String) =
+//  {
+//    val backup = Neo4jBackup.neo4jDataSource(getInner(), location)
+//    backup.doBackup();
+//  }
 
   /**
    * Internal method. Don't use this.
